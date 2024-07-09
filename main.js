@@ -12,6 +12,11 @@ function toggleOverlay() {
 let addTopic = document.getElementById("btn-add")
 addTopic.addEventListener("click", toggleOverlay)
 
+let closeOverlay = document.getElementById("close-overlay")
+closeOverlay.addEventListener("click", ()=> {
+    toggleOverlay();
+})
+
 let btnShowHide = document.querySelectorAll(".showHide")
 
 btnShowHide.forEach(btn => {
@@ -52,6 +57,7 @@ function viewChanger(){
         }
         document.getElementById("view-toggle").innerText = "Hide";
         document.getElementById("btn-add").style.display = "table-row";
+        uncheck();
 
     }
     if(view.value == "hide"){
@@ -65,6 +71,7 @@ function viewChanger(){
         }
         document.getElementById("view-toggle").innerText = "Show";
         document.getElementById("btn-add").style.display = "none";
+        uncheck();
     }
     
 }
