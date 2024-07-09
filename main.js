@@ -27,7 +27,7 @@ function handleForm(event) {
                 <td><input type="checkbox" class="row-ckbx" /></td>
                 <td>${fd.get("topic")}</td>
                 <td>${fd.get("hours")} Hours ${fd.get("mins")} Minutes</td>
-                <td><a href="${fd.get("link")}"> Link </td>
+                <td><a href="${fd.get("link")}"> ${fd.get("link")} </td>
             </tr>`;
     toggleOverlay()
 
