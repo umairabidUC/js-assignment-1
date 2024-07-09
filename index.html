@@ -15,16 +15,16 @@
     <div id="overlay">
         <div id="overlay_content">
             <h1>Add Topic</h1>
-            <form method="POST" id="form">
+            <form method="POST" id="form", name="formTopic">
             <label>Topic Name: </label>
-            <input type="text" id="topic" />
+            <input type="text" id="topic" name="topic"/>
             <label>Hours: </label>
-            <input type="number" id="hours" min="0"/>
+            <input type="number" id="hours" min="0" name="hours"/>
             <label>Minutes</label>
-            <input type="number" id="mins" min="1" max="59"/>
+            <input type="number" id="mins" min="1" max="59" name="mins"/>
             <label>Link/Resource: </label>
-            <input type="text" id="link">
-            <button id="btn-add-topic" type="submit">Submit</button>
+            <input type="text" id="link" name="link">
+            <button id="btn-add-topic" type="submit" name="submit">Submit</button>
         </form>
         </div>
     </div>
@@ -39,7 +39,7 @@
                 <th scope="col">Actions</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="table-body">
             <tr>
                 <td><input type="checkbox" class="row-ckbx" /></td>
                 <td>Basics</td>
