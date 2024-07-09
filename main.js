@@ -75,6 +75,7 @@ function uncheck(){
     for(const i of rows){
         i.checked = false;
     }
+    document.getElementById("master-ckbx").checked = false;
 }
 
 function toChange(view){
@@ -85,7 +86,7 @@ function toChange(view){
         let rows = document.getElementsByClassName("show");
         
         for(const i of rows){
-           if(i.children[0].children[0].checked) toHide.push(toHideIndex);
+           if(i.children[0].children[0].checked) toHide.push(i);
            toHideIndex++; 
         }
     }
@@ -93,7 +94,7 @@ function toChange(view){
         let rows = document.getElementsByClassName("hide");
         
         for(const i of rows){
-           if(i.children[0].children[0].checked) toHide.push(toHideIndex);
+           if(i.children[0].children[0].checked) toHide.push(i);
            toHideIndex++; 
         }
     }
@@ -104,10 +105,11 @@ let viewBtn = document.getElementById("view-toggle")
 viewBtn.addEventListener("click", () => {
    
     if (view.value == "show") {
+        //debugger;
         let rows = document.getElementsByClassName("show")
         let toHide = toChange("show");
         for (const i of toHide) {
-            rows[i].classList.replace("show","hide")
+            i?.classList?.replace("show","hide")
         }
         uncheck();
         viewChanger();
@@ -116,7 +118,7 @@ viewBtn.addEventListener("click", () => {
         let rows = document.getElementsByClassName("hide")
         let toHide = toChange("hide");
         for (const i of toHide) {
-            rows[i].classList.replace("hide","show")
+            i.classList.replace("hide","show")
         }
         uncheck();
         viewChanger();
