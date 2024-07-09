@@ -12,50 +12,59 @@
 </head>
 
 <body>
+    <div id="main-div">
+        <h1>Topics Covered While Learning JS</h1>
+        <h3>Change View
+        <select name="showHide" id="view">
+            <option value="show">Show</option>
+            <option value="hide">Hide</option>
+          </select> 
+          <button class="btn" id="view-toggle">Hide</button>   
+        </h3>      
+        <div class="table-wrapper">
+        <table class="f1-table">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" id="master-ckbx" /></th>
+                    <th scope="col">Topics</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col">Link/Resource</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+                <tr class="show">
+                    <td><input type="checkbox" class="row-ckbx" /></td>
+                    <td>Basics</td>
+                    <td>01 Hours 30 Minutes</td>
+                    <td><a href="https://github.com/Asabeneh/30-Days-Of-JavaScript/blob/master/readMe.md"> Link </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>
+                        <button id="btn-add">Add Topic</button>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    </div>
     <div id="overlay">
         <div id="overlay_content">
             <h1>Add Topic</h1>
-            <form method="POST" id="form", name="formTopic">
-            <label>Topic Name: </label>
-            <input type="text" id="topic" name="topic"/>
-            <label>Hours: </label>
-            <input type="number" id="hours" min="0" name="hours"/>
-            <label>Minutes</label>
-            <input type="number" id="mins" min="1" max="59" name="mins"/>
-            <label>Link/Resource: </label>
-            <input type="text" id="link" name="link">
-            <button id="btn-add-topic" type="submit" name="submit">Submit</button>
-        </form>
+            <form method="POST" id="form" , name="formTopic">
+                <label>Topic Name: </label>
+                <input type="text" id="topic" name="topic" />
+                <label>Hours: </label>
+                <input type="number" id="hours" min="0" name="hours" />
+                <label>Minutes</label>
+                <input type="number" id="mins" min="1" max="59" name="mins" />
+                <label>Link/Resource: </label>
+                <input type="text" id="link" name="link">
+                <button class="btn" id="btn-add-topic" type="submit" name="submit">Submit</button>
+            </form>
         </div>
     </div>
-    <h1>Topics Covered While Learning JS</h1>
-    <table>
-        <thead>
-            <tr>
-                <th><input type="checkbox" id="col-ckbx" /></th>
-                <th scope="col">Topics</th>
-                <th scope="col">Duration</th>
-                <th scope="col">Link/Resource</th>
-                <th scope="col">Actions</th>
-            </tr>
-        </thead>
-        <tbody id="table-body">
-            <tr>
-                <td><input type="checkbox" class="row-ckbx" /></td>
-                <td>Basics</td>
-                <td>01 Hours 30 Minutes</td>
-                <td><a href="https://github.com/Asabeneh/30-Days-Of-JavaScript/blob/master/readMe.md"> Link </td>
-                <td><button class="showHide" id="sh">Show/Hide</button></td>
-            </tr>
-        </tbody>
-        <tfoot>
-            <tr>
-                <td>
-                    <button id="btn-add">Add Topic</button>
-                </td>
-            </tr>
-        </tfoot>
-    </table>
 
     <script src="main.js"></script>
 </body>
