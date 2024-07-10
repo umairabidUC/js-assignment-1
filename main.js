@@ -13,17 +13,21 @@ function minsToHours(min) {
         minsToAdd = Math.floor(dec * 60);
         return [hoursToAdd, minsToAdd]
     }
+    else return [0,min]
 }
 
 //New Topic Form Data Handling Logic
 let tooltipflag = false;
 let form = document.querySelector("#form");
 function handleForm(event) {
+    debugger;
     event.preventDefault();
     let fd = new FormData(form)
     let mins = fd.get("mins")
     let hours = fd.get("hours")
+    console.log(mins)
     let correctedHoursMins = minsToHours(mins);
+    console.log(correctedHoursMins)
     fd.set("hours", Number(hours) + correctedHoursMins[0]);
     fd.set("mins", correctedHoursMins[1])
 
@@ -33,6 +37,10 @@ function handleForm(event) {
                 <td>${fd.get("topic")}</td>
                 <td>${fd.get("hours")} Hours ${fd.get("mins")} Minutes</td>
                 <td><a href="${fd.get("link")}"> ${fd.get("link")} </td>
+                <td><button type="button" class="btn btn-outline-danger delete" data-bs-toggle="modal"
+                                data-bs-target="#confirmDeletion" data-mdb-ripple-init>Delete</button><button type="button"
+                                class="btn btn-outline-warning edit" data-bs-toggle="modal"
+                                data-bs-target="#editForm">Edit</button></td>
             </tr>`;
     tooltipflag = true;
 
@@ -199,7 +207,6 @@ let rowToDelete = document.getElementsByClassName("delete");
 
 for(const del of rowToDelete){
     let row = del;
-    debugger;
     del.addEventListener("click" ,()=>{
         document.getElementById("btn-confirm-delete").addEventListener("click", ()=>{
             row.parentElement.parentElement.remove()
@@ -207,3 +214,42 @@ for(const del of rowToDelete){
     })
 }
 
+let editBtn = document.getElementsByClassName("edit")
+let currRow = null;
+//let row = null;
+for(const edit of editBtn){
+    let row = edit.parentElement.parentElement;
+    edit.addEventListener("click", ()=>{
+        currRow = row;
+        let topic = row.children[1].innerText;
+        let hours = Number(row.children[2].innerText.split(" ")[0]);
+        let mins = Number(row.children[2].innerText.split(" ")[2]);
+        let link = row.children[3].innerText;
+        let editForm = document.getElementById("edit-form-body").children
+        editForm[1].value = topic;
+        editForm[3].value = hours;
+        editForm[5].value = mins;
+        editForm[7].value = link;
+    })
+}
+
+let editForm = document.getElementById("formEdit");
+
+let link = null;
+editForm.addEventListener("submit", (e)=>{
+    e.preventDefault();
+    let ef = new FormData(editForm);
+    let mins = ef.get("mins")
+    let hours = ef.get("hours")
+    console.log(mins)
+    let correctedHoursMins = minsToHours(mins);
+    console.log(correctedHoursMins)
+    ef.set("hours", Number(hours) + correctedHoursMins[0]);
+    ef.set("mins", correctedHoursMins[1])
+    currRow.children[1].innerText = ef.get("topic");
+    currRow.children[2].innerText = `${ef.get("hours")} Hours ${ef.get("mins")} Minutes`;
+    link = currRow.children[3]
+    currRow.children[3].children[0].href = ef.get("link");
+    currRow.children[3].children[0].innerText = ef.get("link")
+
+})
