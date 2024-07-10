@@ -35,12 +35,14 @@ function handleForm(event) {
     table.innerHTML += `<tr class="show">
                 <td><input type="checkbox" class="row-ckbx" /></td>
                 <td>${fd.get("topic")}</td>
-                <td>${fd.get("hours")} Hours ${fd.get("mins")} Minutes</td>
+                <td>${fd.get("hours").padStart(2,"0")} Hours ${fd.get("mins").padStart(2,"0")} Minutes</td>
                 <td><a href="${fd.get("link")}"> ${fd.get("link")} </td>
-                <td><button type="button" class="btn btn-outline-danger delete" data-bs-toggle="modal"
-                                data-bs-target="#confirmDeletion" data-mdb-ripple-init>Delete</button><button type="button"
+               <td><div class="d-grid gap-2"><button type="button" class="btn btn-outline-danger delete" data-bs-toggle="modal"
+                                data-bs-target="#confirmDeletion">Delete</button><button type="button"
                                 class="btn btn-outline-warning edit" data-bs-toggle="modal"
-                                data-bs-target="#editForm">Edit</button></td>
+                                data-bs-target="#editForm">Edit</button>
+                            </div>
+                            </td>
             </tr>`;
     tooltipflag = true;
 
@@ -247,7 +249,7 @@ editForm.addEventListener("submit", (e)=>{
     ef.set("hours", Number(hours) + correctedHoursMins[0]);
     ef.set("mins", correctedHoursMins[1])
     currRow.children[1].innerText = ef.get("topic");
-    currRow.children[2].innerText = `${ef.get("hours")} Hours ${ef.get("mins")} Minutes`;
+    currRow.children[2].innerText = `${ef.get("hours").padStart(2,"0")} Hours ${ef.get("mins").padStart(2,"0")} Minutes`;
     link = currRow.children[3]
     currRow.children[3].children[0].href = ef.get("link");
     currRow.children[3].children[0].innerText = ef.get("link")
