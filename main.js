@@ -1,27 +1,32 @@
 //This is the utility function which opens the overlay to add the topics
-function toggleOverlay() {
-    let overlay = document.getElementById("overlay")
-    let bg = document.getElementById("main-div")
-    overlay.style.display = (overlay.style.display === "flex") ? "none" : "flex";
-    bg.style.filter = (bg.style.filter === "blur(6px)") ? "none" : "blur(6px)";
-}
+
 
 //Toggle to open and close the Overlay
-let addTopic = document.getElementById("btn-add")
-addTopic.addEventListener("click", toggleOverlay)
+
 
 //Overlay Close button
-let closeOverlay = document.getElementById("close-overlay")
-closeOverlay.addEventListener("click", () => {
-    toggleOverlay();
-})
 
+function minsToHours(min) {
+    if (min > 59) {
+        dec = (min / 60) % 1;
+        hoursToAdd = Math.floor(min / 60);
+        minsToAdd = Math.floor(dec * 60);
+        return [hoursToAdd, minsToAdd]
+    }
+}
 
 //New Topic Form Data Handling Logic
+let tooltipflag = false;
 let form = document.querySelector("#form");
 function handleForm(event) {
     event.preventDefault();
     let fd = new FormData(form)
+    let mins = fd.get("mins")
+    let hours = fd.get("hours")
+    let correctedHoursMins = minsToHours(mins);
+    fd.set("hours", Number(hours) + correctedHoursMins[0]);
+    fd.set("mins", correctedHoursMins[1])
+
     let table = document.getElementById("table-body")
     table.innerHTML += `<tr class="show">
                 <td><input type="checkbox" class="row-ckbx" /></td>
@@ -29,13 +34,22 @@ function handleForm(event) {
                 <td>${fd.get("hours")} Hours ${fd.get("mins")} Minutes</td>
                 <td><a href="${fd.get("link")}"> ${fd.get("link")} </td>
             </tr>`;
-    toggleOverlay()
+    tooltipflag = true;
 
 }
 form.addEventListener('submit', handleForm);
 
 
 
+const toastLiveExample = document.getElementById('liveToast')
+const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+let toastTrigger = document.getElementById("btn-add-topic")
+toastTrigger.addEventListener('click', () => {
+    if(tooltipflag){
+        toastBootstrap.show()
+    }
+    tooltipflag = false;
+})
 let view = document.getElementById("view")
 
 
@@ -178,4 +192,18 @@ for (const ckbx of ckbxs) {
     })
 }
 
+//Deleting a Row:
+let rowToDelete = document.getElementsByClassName("delete");
+
+
+
+for(const del of rowToDelete){
+    let row = del;
+    debugger;
+    del.addEventListener("click" ,()=>{
+        document.getElementById("btn-confirm-delete").addEventListener("click", ()=>{
+            row.parentElement.parentElement.remove()
+        })
+    })
+}
 

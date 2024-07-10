@@ -8,92 +8,190 @@
 
     <link href="style.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Rock+Salt" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 </head>
 
 <body>
     <div id="main-div">
         <h1>Topics Covered While Learning JS</h1>
         <h3>Change View
-        <select name="showHide" id="view">
-            <option value="show">Show</option>
-            <option value="hide">Hide</option>
-          </select> 
-          <button class="btn" id="view-toggle">Hide</button>   
-        </h3>      
+            <select name="showHide" id="view">
+                <option value="show">Show</option>
+                <option value="hide">Hide</option>
+            </select>
+            <button class="btn" id="view-toggle">Hide</button>
+        </h3>
         <div class="table-wrapper">
-        <table class="styled-table">
-            <thead>
-                <tr style="text-align: center;">
-                    <th><input type="checkbox" id="master-ckbx" /></th>
-                    <th scope="col">Topics</th>
-                    <th scope="col">Duration</th>
-                    <th scope="col">Link/Resource</th>
-                    <th scope="col">Actions</th>
-                </tr>
-            </thead>
-            <tbody id="table-body">
-                <tr class="show">
-                    <td><input type="checkbox" class="row-ckbx" /></td>
-                    <td>Basics</td>
-                    <td>01 Hours 30 Minutes</td>
-                    <td><a href="https://github.com/Asabeneh/30-Days-Of-JavaScript/blob/master/readMe.md"> https://github.com/Asabeneh/30-Days-Of-JavaScript/blob/master/readMe.md </td>
-                    <td><button>Delete</button></td>    
-                </tr>
-                <tr class="show">
-                    <td><input type="checkbox" class="row-ckbx" /></td>
-                    <td>Arrays</td>
-                    <td>00 Hours 30 Minutes</td>
-                    <td><a href="https://github.com/Asabeneh/30-Days-Of-JavaScript/blob/master/readMe.md"> https://github.com/Asabeneh/30-Days-Of-JavaScript/blob/master/readMe.md </td>
-                </tr>
-                <tr class="show">
-                    <td><input type="checkbox" class="row-ckbx" /></td>
-                    <td>Objects</td>
-                    <td>02 Hours 00 Minutes</td>
-                    <td><a href="https://github.com/Asabeneh/30-Days-Of-JavaScript/blob/master/readMe.md"> https://github.com/Asabeneh/30-Days-Of-JavaScript/blob/master/readMe.md </td>
-                </tr>
-                <tr class="show">
-                    <td><input type="checkbox" class="row-ckbx" /></td>
-                    <td>DOM Manipulation</td>
-                    <td>01 Hours 45 Minutes</td>
-                    <td><a href="https://github.com/Asabeneh/30-Days-Of-JavaScript/blob/master/readMe.md"> https://github.com/Asabeneh/30-Days-Of-JavaScript/blob/master/readMe.md </td>
-                </tr>
-                <tr class="hide">
-                    <td><input type="checkbox" class="row-ckbx" /></td>
-                    <td>Promises</td>
-                    <td>08 Hours 30 Minutes</td>
-                    <td><a href="https://github.com/Asabeneh/30-Days-Of-JavaScript/blob/master/readMe.md"> https://github.com/Asabeneh/30-Days-Of-JavaScript/blob/master/readMe.md </td>
-                </tr>
-                <tr class="hide">
-                    <td><input type="checkbox" class="row-ckbx" /></td>
-                    <td>Async Await</td>
-                    <td>05 Hours 30 Minutes</td>
-                    <td><a href="https://github.com/Asabeneh/30-Days-Of-JavaScript/blob/master/readMe.md"> https://github.com/Asabeneh/30-Days-Of-JavaScript/blob/master/readMe.md </td>
-                </tr>
-            </tbody>
-            <tfoot>
-            </tfoot>
-        </table>
-        <button id="btn-add" class="btn" style="text-align: center; padding: 50px;margin-left: 30%; margin-top: 1%; width: 40%;">Add Topic</button>
-    </div>
-    </div>
-    <div id="overlay">
-        <div id="overlay_content">
-            <button id="close-overlay" style="position: absolute; left: 90%;">X</button>
-            <h1>Add Topic</h1>
-            <form method="POST" id="form" , name="formTopic">
-                <label>Topic Name: </label>
-                <input type="text" id="topic" name="topic" required/>
-                <label>Hours: </label>
-                <input type="number" id="hours" min="0" name="hours" required/>
-                <label>Minutes</label>
-                <input type="number" id="mins" min="1" max="59" name="mins" required/>
-                <label>Link/Resource: </label>
-                <input type="text" id="link" name="link">
-                <button class="btn" id="btn-add-topic" type="submit" name="submit" style="padding: 10px;">Submit</button>
-            </form>
+            <table class="styled-table">
+                <thead>
+                    <tr style="text-align: center;">
+                        <th><input type="checkbox" id="master-ckbx" /></th>
+                        <th scope="col">Topics</th>
+                        <th scope="col">Duration</th>
+                        <th scope="col">Link/Resource</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    <tr class="show">
+                        <td><input type="checkbox" class="row-ckbx" /></td>
+                        <td>Basics</td>
+                        <td>01 Hours 30 Minutes</td>
+                        <td><a href="https://github.com/Asabeneh/30-Days-Of-JavaScript/blob/master/readMe.md">
+                                https://github.com/Asabeneh/30-Days-Of-JavaScript/blob/master/readMe.md </td>
+                        <td><button type="button" class="btn btn-outline-danger delete" data-bs-toggle="modal"
+                                data-bs-target="#confirmDeletion">Delete</button><button type="button"
+                                class="btn btn-outline-warning edit" data-bs-toggle="modal"
+                                data-bs-target="#editForm">Edit</button>
+                        </td>
+                    </tr>
+                    <tr class="show">
+                        <td><input type="checkbox" class="row-ckbx" /></td>
+                        <td>Arrays</td>
+                        <td>00 Hours 30 Minutes</td>
+                        <td><a href="https://github.com/Asabeneh/30-Days-Of-JavaScript/blob/master/readMe.md">
+                                https://github.com/Asabeneh/30-Days-Of-JavaScript/blob/master/readMe.md </td>
+                        <td><button type="button" class="btn btn-outline-danger delete" data-bs-toggle="modal"
+                                data-bs-target="#confirmDeletion" data-mdb-ripple-init>Delete</button></td>
+                    </tr>
+                    <tr class="show">
+                        <td><input type="checkbox" class="row-ckbx" /></td>
+                        <td>Objects</td>
+                        <td>02 Hours 00 Minutes</td>
+                        <td><a href="https://github.com/Asabeneh/30-Days-Of-JavaScript/blob/master/readMe.md">
+                                https://github.com/Asabeneh/30-Days-Of-JavaScript/blob/master/readMe.md </td>
+                        <td><button type="button" class="btn btn-outline-danger delete" data-bs-toggle="modal"
+                                data-bs-target="#confirmDeletion" data-mdb-ripple-init>Delete</button></td>
+                    </tr>
+                    <tr class="show">
+                        <td><input type="checkbox" class="row-ckbx" /></td>
+                        <td>DOM Manipulation</td>
+                        <td>01 Hours 45 Minutes</td>
+                        <td><a href="https://github.com/Asabeneh/30-Days-Of-JavaScript/blob/master/readMe.md">
+                                https://github.com/Asabeneh/30-Days-Of-JavaScript/blob/master/readMe.md </td>
+                        <td><button type="button" class="btn btn-outline-danger delete" data-bs-toggle="modal"
+                                data-bs-target="#confirmDeletion" data-mdb-ripple-init>Delete</button></td>
+                    </tr>
+                    <tr class="hide">
+                        <td><input type="checkbox" class="row-ckbx" /></td>
+                        <td>Promises</td>
+                        <td>08 Hours 30 Minutes</td>
+                        <td><a href="https://github.com/Asabeneh/30-Days-Of-JavaScript/blob/master/readMe.md">
+                                https://github.com/Asabeneh/30-Days-Of-JavaScript/blob/master/readMe.md </td>
+                        <td><button type="button" class="btn btn-outline-danger delete" data-bs-toggle="modal"
+                                data-bs-target="#confirmDeletion" data-mdb-ripple-init>Delete</button></td>
+                    </tr>
+                    <tr class="hide">
+                        <td><input type="checkbox" class="row-ckbx" /></td>
+                        <td>Async Await</td>
+                        <td>05 Hours 30 Minutes</td>
+                        <td><a href="https://github.com/Asabeneh/30-Days-Of-JavaScript/blob/master/readMe.md">
+                                https://github.com/Asabeneh/30-Days-Of-JavaScript/blob/master/readMe.md </td>
+                        <td><button type="button" class="btn btn-outline-danger delete" data-bs-toggle="modal"
+                                data-bs-target="#confirmDeletion" data-mdb-ripple-init>Delete</button></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+
+            <button type="button" class="btn btn-primary" id="btn-add" data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop">
+                Add Topic
+            </button>
         </div>
+    </div>
+
+    <!--  Add Topic Modal -->
+    <form method="POST" id="form" class="form-control" name="formTopic">
+        <div class="modal fade" id="editForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Topic</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <label>Topic Name: </label>
+                        <input type="text" id="topic" name="topic" minlength="5" class="form-control" required />
+                        <label>Hours: </label>
+                        <input type="number" id="hours" min="0" name="hours" class="form-control" required />
+                        <label>Minutes</label>
+                        <input type="number" id="mins" min="0" name="mins" class="form-control" required />
+                        <label>Link/Resource: </label>
+                        <input type="url" id="link" class="form-control" name="link">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" id="btn-add-topic" class="btn btn-success">Add</button>
+                    </div>
+    </form>
+    </div>
+    </div>
+    </div>
+
+    <div class="toast-container position-fixed top-0 start-50 translate-middle-x">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">Form Submitted!</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Topic Added!
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirm Deletion Modal -->
+    <div class="modal fade" id="confirmDeletion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete This Row</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this row?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" id="btn-confirm-delete" class="btn btn-danger" data-bs-dismiss="modal">Confirm
+                        Deletion</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form method="POST" id="formEdit" class="form-control" name="formTopic">
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <label>Topic Name: </label>
+                        <input type="text" id="topic" name="topic" minlength="5" class="form-control" required />
+                        <label>Hours: </label>
+                        <input type="number" id="hours" min="0" name="hours" class="form-control" required />
+                        <label>Minutes</label>
+                        <input type="number" id="mins" min="0" name="mins" class="form-control" required />
+                        <label>Link/Resource: </label>
+                        <input type="url" id="link" class="form-control" name="link">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" id="btn-add-topic" class="btn btn-success">Save</button>
+                    </div>
+    </form>
+    </div>
+    </div>
     </div>
 
     <script src="main.js"></script>
