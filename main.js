@@ -135,7 +135,6 @@ let masterCheck = document.getElementById("master-ckbx")
 
 masterCheck.addEventListener("change", () => {
     if (view.value == "show") {
-        console.log(masterCheck.checked)
         let rows = document.getElementsByClassName("show")
         for (const i of rows) {
             i.children[0].children[0].checked = masterCheck.checked;
@@ -149,5 +148,34 @@ masterCheck.addEventListener("change", () => {
         }
     }
 })
+
+
+
+
+//Checkbox Errors Solution:
+let ckbxs = document.getElementsByClassName("row-ckbx")
+
+
+for (const ckbx of ckbxs) {
+    ckbx.addEventListener("change", () => {
+        let row_ckbx = document.getElementsByClassName("row-ckbx");
+        console.log(row_ckbx[0].parentElement.parentElement.classList.value)
+        let check = true;
+        debugger;
+        for (const i of row_ckbx) {
+            if (check && i.parentElement.parentElement.classList.value == "show" && view.value == "show" && i.checked) {
+                console.log(check);
+            } else if (check && i.parentElement.parentElement.classList.value == "hide" && view.value == "hide" && i.checked) {
+                console.log(check);
+            } else if (i.parentElement.parentElement.classList.value == "show" && view.value == "hide") console.log(check);
+            else if (i.parentElement.parentElement.classList.value == "hide" && view.value == "show") console.log(check);
+            else check = false;
+        }
+        if (check) {
+            masterCheck.checked = true;
+        }
+        else masterCheck.checked = false;
+    })
+}
 
 
