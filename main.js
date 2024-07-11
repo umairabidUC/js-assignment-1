@@ -59,7 +59,9 @@ function handleForm(event) {
 }
 form.addEventListener('submit', handleForm);
 
-
+function trimStr(e){
+    e.target.value = e.target.value.trim();
+}
 
 let view = document.getElementById("view")
 
