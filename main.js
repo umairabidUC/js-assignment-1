@@ -13,14 +13,13 @@ function minsToHours(min) {
         minsToAdd = Math.floor(dec * 60);
         return [hoursToAdd, minsToAdd]
     }
-    else return [0,min]
+    else return [0, min]
 }
 
 //New Topic Form Data Handling Logic
 let tooltipflag = false;
 let form = document.querySelector("#form");
 function handleForm(event) {
-    debugger;
     event.preventDefault();
     let fd = new FormData(form)
     let mins = fd.get("mins")
@@ -35,16 +34,17 @@ function handleForm(event) {
     table.innerHTML += `<tr class="show">
                 <td><input type="checkbox" class="row-ckbx" /></td>
                 <td>${fd.get("topic")}</td>
-                <td>${fd.get("hours").padStart(2,"0")} Hours ${fd.get("mins").padStart(2,"0")} Minutes</td>
+                <td>${fd.get("hours").padStart(2, "0")} Hours ${fd.get("mins").padStart(2, "0")} Minutes</td>
                 <td><a href="${fd.get("link")}"> ${fd.get("link")} </td>
                <td><div class="d-grid gap-2"><button type="button" class="btn btn-outline-danger delete" data-bs-toggle="modal"
-                                data-bs-target="#confirmDeletion">Delete</button><button type="button"
+                                data-bs-target="#confirmDeletion" onClick="delRow(event)">Delete</button><button type="button"
                                 class="btn btn-outline-warning edit" data-bs-toggle="modal"
-                                data-bs-target="#editForm">Edit</button>
+                                data-bs-target="#editForm" onclick="editRow(event)">Edit</button>
                             </div>
                             </td>
             </tr>`;
     tooltipflag = true;
+    editAll();
 
 }
 form.addEventListener('submit', handleForm);
@@ -55,7 +55,7 @@ const toastLiveExample = document.getElementById('liveToast')
 const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
 let toastTrigger = document.getElementById("btn-add-topic")
 toastTrigger.addEventListener('click', () => {
-    if(tooltipflag){
+    if (tooltipflag) {
         toastBootstrap.show()
     }
     tooltipflag = false;
@@ -185,7 +185,6 @@ for (const ckbx of ckbxs) {
         let row_ckbx = document.getElementsByClassName("row-ckbx");
         console.log(row_ckbx[0].parentElement.parentElement.classList.value)
         let check = true;
-        debugger;
         for (const i of row_ckbx) {
             if (check && i.parentElement.parentElement.classList.value == "show" && view.value == "show" && i.checked) {
                 console.log(check);
@@ -206,12 +205,20 @@ for (const ckbx of ckbxs) {
 let rowToDelete = document.getElementsByClassName("delete");
 
 
+let eVar = null;
 
-for(const del of rowToDelete){
+function delRow(e) {
+    document.getElementById("btn-confirm-delete").addEventListener("click", () => {
+        e.target.parentElement.parentElement.parentElement.remove()
+    })
+}
+
+
+for (const del of rowToDelete) {
     let row = del;
-    del.addEventListener("click" ,()=>{
-        document.getElementById("btn-confirm-delete").addEventListener("click", ()=>{
-            row.parentElement.parentElement.remove()
+    del.addEventListener("click", (e) => {
+        document.getElementById("btn-confirm-delete").addEventListener("click", () => {
+            row.parentElement.parentElement.parentElement.remove()
         })
     })
 }
@@ -219,26 +226,35 @@ for(const del of rowToDelete){
 let editBtn = document.getElementsByClassName("edit")
 let currRow = null;
 //let row = null;
-for(const edit of editBtn){
-    let row = edit.parentElement.parentElement;
-    edit.addEventListener("click", ()=>{
-        currRow = row;
-        let topic = row.children[1].innerText;
-        let hours = Number(row.children[2].innerText.split(" ")[0]);
-        let mins = Number(row.children[2].innerText.split(" ")[2]);
-        let link = row.children[3].innerText;
-        let editForm = document.getElementById("edit-form-body").children
-        editForm[1].value = topic;
-        editForm[3].value = hours;
-        editForm[5].value = mins;
-        editForm[7].value = link;
-    })
+
+
+function editRow(e) {
+    let row = e.target.parentElement.parentElement.parentElement
+    let topic = row.children[1].innerText;
+    let hours = Number(row.children[2].innerText.split(" ")[0]);
+    let mins = Number(row.children[2].innerText.split(" ")[2]);
+    let link = row.children[3].innerText;
+    let editForm = document.getElementById("edit-form-body").children
+    editForm[1].value = topic;
+    editForm[3].value = hours;
+    editForm[5].value = mins;
+    editForm[7].value = link;
+    
+   
 }
+
+function editAll(){
+    
+    for (const edit of editBtn) {
+        edit.addEventListener("click", editRow);
+    }
+}
+editAll();
 
 let editForm = document.getElementById("formEdit");
 
 let link = null;
-editForm.addEventListener("submit", (e)=>{
+editForm.addEventListener("submit", (e) => {
     e.preventDefault();
     let ef = new FormData(editForm);
     let mins = ef.get("mins")
@@ -249,7 +265,7 @@ editForm.addEventListener("submit", (e)=>{
     ef.set("hours", Number(hours) + correctedHoursMins[0]);
     ef.set("mins", correctedHoursMins[1])
     currRow.children[1].innerText = ef.get("topic");
-    currRow.children[2].innerText = `${ef.get("hours").padStart(2,"0")} Hours ${ef.get("mins").padStart(2,"0")} Minutes`;
+    currRow.children[2].innerText = `${ef.get("hours").padStart(2, "0")} Hours ${ef.get("mins").padStart(2, "0")} Minutes`;
     link = currRow.children[3]
     currRow.children[3].children[0].href = ef.get("link");
     currRow.children[3].children[0].innerText = ef.get("link")
