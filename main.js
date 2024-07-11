@@ -16,6 +16,8 @@ function minsToHours(min) {
     else return [0, min]
 }
 
+let addTopicModal = new bootstrap.Modal(document.getElementById("staticBackdrop"))
+
 //New Topic Form Data Handling Logic
 let tooltipflag = false;
 let form = document.querySelector("#form");
@@ -46,7 +48,7 @@ function handleForm(event) {
     tooltipflag = true;
     editAll();
     checkBoxChecking();
-
+    addTopicModal.hide();
 }
 form.addEventListener('submit', handleForm);
 
@@ -257,6 +259,8 @@ editAll();
 
 let editForm = document.getElementById("formEdit");
 
+let editFormModal = new bootstrap.Modal(document.getElementById("editForm"));
+
 let link = null;
 editForm.addEventListener("submit", (e) => {
     debugger;
@@ -272,5 +276,5 @@ editForm.addEventListener("submit", (e) => {
     link = currRow.children[3]
     currRow.children[3].children[0].href = ef.get("link");
     currRow.children[3].children[0].innerText = ef.get("link")
-
+    editFormModal.hide();
 })
