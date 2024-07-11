@@ -62,7 +62,9 @@ form.addEventListener('submit', handleForm);
 
 let view = document.getElementById("view")
 
-
+function trimStr(e){
+    e.target.value = e.target.value.trim();
+}
 
 
 //A utility function for changing the view and updating the UI to show proper data.
