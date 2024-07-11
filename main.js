@@ -45,6 +45,7 @@ function handleForm(event) {
             </tr>`;
     tooltipflag = true;
     editAll();
+    checkBoxChecking();
 
 }
 form.addEventListener('submit', handleForm);
@@ -179,27 +180,31 @@ masterCheck.addEventListener("change", () => {
 //Checkbox Errors Solution:
 let ckbxs = document.getElementsByClassName("row-ckbx")
 
+function checkBoxChecking(){
 
-for (const ckbx of ckbxs) {
-    ckbx.addEventListener("change", () => {
-        let row_ckbx = document.getElementsByClassName("row-ckbx");
-        console.log(row_ckbx[0].parentElement.parentElement.classList.value)
-        let check = true;
-        for (const i of row_ckbx) {
-            if (check && i.parentElement.parentElement.classList.value == "show" && view.value == "show" && i.checked) {
-                console.log(check);
-            } else if (check && i.parentElement.parentElement.classList.value == "hide" && view.value == "hide" && i.checked) {
-                console.log(check);
-            } else if (i.parentElement.parentElement.classList.value == "show" && view.value == "hide") console.log(check);
-            else if (i.parentElement.parentElement.classList.value == "hide" && view.value == "show") console.log(check);
-            else check = false;
-        }
-        if (check) {
-            masterCheck.checked = true;
-        }
-        else masterCheck.checked = false;
-    })
+    for (const ckbx of ckbxs) {
+        ckbx.addEventListener("change", () => {
+            let row_ckbx = document.getElementsByClassName("row-ckbx");
+            console.log(row_ckbx[0].parentElement.parentElement.classList.value)
+            let check = true;
+            debugger;   
+            for (const i of row_ckbx) {
+                if (check && i.parentElement.parentElement.classList.value == "show" && view.value == "show" && i.checked) {
+                    console.log(check);
+                } else if (check && i.parentElement.parentElement.classList.value == "hide" && view.value == "hide" && i.checked) {
+                    console.log(check);
+                } else if (i.parentElement.parentElement.classList.value == "show" && view.value == "hide") console.log(check);
+                else if (i.parentElement.parentElement.classList.value == "hide" && view.value == "show") console.log(check);
+                else check = false;
+            }
+            if (check) {
+                masterCheck.checked = true;
+            }
+            else masterCheck.checked = false;
+        })
+    }
 }
+checkBoxChecking();
 
 //Deleting a Row:
 let rowToDelete = document.getElementsByClassName("delete");
