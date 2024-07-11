@@ -16,19 +16,18 @@ function minsToHours(min) {
     else return [0, min]
 }
 
-//New Topic Form Data Handling Logic
 let tooltipflag = true;
 let form = document.querySelector("#form");
 const toastLiveExample = document.getElementById('liveToast')
 const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
 let toastTrigger = document.getElementById("btn-add-topic")
 toastTrigger.addEventListener('click', () => {
-    debugger;
     if (tooltipflag) {
         toastBootstrap.show()
     }
     tooltipflag = false;
 })
+//New Topic Form Data Handling Logic
 function handleForm(event) {
     event.preventDefault();
     let fd = new FormData(form)
@@ -53,7 +52,7 @@ function handleForm(event) {
                                 </div>
                                 </td>
                                 </tr>`;
-                                tooltipflag = true;
+    tooltipflag = true;
     editAll();
     checkBoxChecking();
 
@@ -188,7 +187,6 @@ function checkBoxChecking(){
             let row_ckbx = document.getElementsByClassName("row-ckbx");
             console.log(row_ckbx[0].parentElement.parentElement.classList.value)
             let check = true;
-            debugger;   
             for (const i of row_ckbx) {
                 if (check && i.parentElement.parentElement.classList.value == "show" && view.value == "show" && i.checked) {
                     console.log(check);
@@ -259,6 +257,17 @@ editAll();
 
 let editForm = document.getElementById("formEdit");
 
+let editToastFlag = true;
+const editToast = document.getElementById('editToast')
+const editToastBootstrap = bootstrap.Toast.getOrCreateInstance(editToast)
+let editToastTrigger = document.getElementById("save")
+editToastTrigger.addEventListener('click', () => {
+    if (editToastFlag) {
+        editToastBootstrap.show()
+    }
+    editToastFlag = false;
+})
+
 let link = null;
 editForm.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -275,5 +284,33 @@ editForm.addEventListener("submit", (e) => {
     link = currRow.children[3]
     currRow.children[3].children[0].href = ef.get("link");
     currRow.children[3].children[0].innerText = ef.get("link")
+    editToastFlag = true;
+    debugger;
+    ef.set("duration",`${ef.get("hours").padStart(2, "0")} Hours ${ef.get("mins").padStart(2, "0")} Minutes`);
+    handleFormData(ef);
 
 })
+
+
+function handleFormData(formData) {
+    // Create a new FormData object
+    const newFormData = new FormData();
+
+    // Extract data from the input FormData object and populate the new FormData object
+    newFormData.append('Topics', formData.get('topics'));
+    newFormData.append('Duration', formData.get('duration'));
+    newFormData.append('Link', formData.get('link'));
+
+    // Send the new FormData object to the server
+    fetch('http://localhost:3000/add-topic', {
+        method: 'POST',
+        body: newFormData
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data); // Handle success
+    })
+    .catch(error => {
+        console.error('Error:', error); // Handle error
+    });
+}
