@@ -16,6 +16,13 @@ function minsToHours(min) {
     else return [0, min]
 }
 
+
+function clearForm(){
+    document.getElementById("addTopic").value = ""
+    document.getElementById("addDuration").value = ""
+    document.getElementById("addLink").value = ""
+}
+clearForm();
 let addTopicModal = new bootstrap.Modal(document.getElementById("staticBackdrop"))
 
 //New Topic Form Data Handling Logic
@@ -52,10 +59,7 @@ function handleForm(event) {
     addTopicModal.hide();
     toastBootstrap.show()
     
-    console.log(document.getElementById("addTopic").textContent)
-    document.getElementById("addTopic").value = ""
-    document.getElementById("addDuration").value = ""
-    document.getElementById("addLink").value = ""
+    clearForm();
 }
 form.addEventListener('submit', handleForm);
 
@@ -265,10 +269,9 @@ editForm.addEventListener("submit", (e) => {
     debugger;
     e.preventDefault();
     let ef = new FormData(editForm);
-    let mins = ef.get("mins")
-    let hours = ef.get("hours")
+    let mins = ef.get("duration")
     let correctedHoursMins = minsToHours(mins);
-    ef.set("hours", Number(hours) + correctedHoursMins[0]);
+    ef.set("hours", correctedHoursMins[0]);
     ef.set("mins", correctedHoursMins[1])
     currRow.children[1].innerText = ef.get("topic");
     currRow.children[2].innerText = `${ef.get("hours").padStart(2, "0")} Hours ${ef.get("mins").padStart(2, "0")} Minutes`;
