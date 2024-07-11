@@ -38,7 +38,7 @@ function handleForm(event) {
     console.log(correctedHoursMins)
     fd.set("hours", Number(hours) + correctedHoursMins[0]);
     fd.set("mins", correctedHoursMins[1])
-
+    fd.set("duration",`${fd.get("hours").padStart(2, "0")} Hours ${fd.get("mins").padStart(2, "0")} Minutes`)
     let table = document.getElementById("table-body")
     table.innerHTML += `<tr class="show">
                 <td><input type="checkbox" class="row-ckbx" /></td>
@@ -55,6 +55,7 @@ function handleForm(event) {
     tooltipflag = true;
     editAll();
     checkBoxChecking();
+    handleFormData(fd,false);
 
 }
 form.addEventListener('submit', handleForm);
@@ -243,6 +244,7 @@ function editRow(e) {
     editForm[3].value = hours;
     editForm[5].value = mins;
     editForm[7].value = link;
+    currRow = row;
     
    
 }
@@ -287,24 +289,32 @@ editForm.addEventListener("submit", (e) => {
     editToastFlag = true;
     debugger;
     ef.set("duration",`${ef.get("hours").padStart(2, "0")} Hours ${ef.get("mins").padStart(2, "0")} Minutes`);
-    handleFormData(ef);
+    handleFormData(ef,true);
 
 })
 
 
-function handleFormData(formData) {
+function handleFormData(formData, updateData) {
     // Create a new FormData object
     const newFormData = new FormData();
 
     // Extract data from the input FormData object and populate the new FormData object
-    newFormData.append('Topics', formData.get('topics'));
+    newFormData.append('Topics', formData.get('topic'));
     newFormData.append('Duration', formData.get('duration'));
     newFormData.append('Link', formData.get('link'));
-
+    debugger;
     // Send the new FormData object to the server
     fetch('http://localhost:3000/add-topic', {
         method: 'POST',
-        body: newFormData
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            Topics: newFormData.get('Topics'),
+            Duration: newFormData.get('Duration'),
+            Link: newFormData.get('Link'),
+            update:updateData
+        })
     })
     .then(response => response.text())
     .then(data => {
