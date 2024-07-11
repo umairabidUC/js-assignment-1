@@ -26,12 +26,11 @@ const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
 function handleForm(event) {
     event.preventDefault();
     let fd = new FormData(form)
-    let mins = fd.get("mins")
-    let hours = fd.get("hours")
+    let mins = fd.get("duration")
     console.log(mins)
     let correctedHoursMins = minsToHours(mins);
     console.log(correctedHoursMins)
-    fd.set("hours", Number(hours) + correctedHoursMins[0]);
+    fd.set("hours", correctedHoursMins[0]);
     fd.set("mins", correctedHoursMins[1])
 
     let table = document.getElementById("table-body")
@@ -55,20 +54,13 @@ function handleForm(event) {
     
     console.log(document.getElementById("addTopic").textContent)
     document.getElementById("addTopic").value = ""
-    document.getElementById("addHours").value = ""
-    document.getElementById("addMins").value = ""
+    document.getElementById("addDuration").value = ""
     document.getElementById("addLink").value = ""
 }
 form.addEventListener('submit', handleForm);
 
 
 
-// toastTrigger.addEventListener('click', () => {
-//     if (tooltipflag) {
-//         toastBootstrap.show()
-//     }
-//     tooltipflag = false;
-// })
 let view = document.getElementById("view")
 
 
@@ -248,9 +240,8 @@ function editRow(e) {
     let link = row.children[3].innerText;
     let editForm = document.getElementById("edit-form-body").children
     editForm[1].value = topic;
-    editForm[3].value = hours;
-    editForm[5].value = mins;
-    editForm[7].value = link;
+    editForm[3].value = mins + hours * 60;
+    editForm[5].value = link;
     currRow = row;
    
 }
