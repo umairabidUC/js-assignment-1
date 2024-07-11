@@ -187,7 +187,6 @@ function checkBoxChecking(){
             let row_ckbx = document.getElementsByClassName("row-ckbx");
             console.log(row_ckbx[0].parentElement.parentElement.classList.value)
             let check = true;
-            debugger;   
             for (const i of row_ckbx) {
                 if (check && i.parentElement.parentElement.classList.value == "show" && view.value == "show" && i.checked) {
                     console.log(check);
@@ -244,7 +243,7 @@ function editRow(e) {
     editForm[3].value = hours;
     editForm[5].value = mins;
     editForm[7].value = link;
-    
+    currRow = row;
    
 }
 
@@ -260,13 +259,12 @@ let editForm = document.getElementById("formEdit");
 
 let link = null;
 editForm.addEventListener("submit", (e) => {
+    debugger;
     e.preventDefault();
     let ef = new FormData(editForm);
     let mins = ef.get("mins")
     let hours = ef.get("hours")
-    console.log(mins)
     let correctedHoursMins = minsToHours(mins);
-    console.log(correctedHoursMins)
     ef.set("hours", Number(hours) + correctedHoursMins[0]);
     ef.set("mins", correctedHoursMins[1])
     currRow.children[1].innerText = ef.get("topic");
