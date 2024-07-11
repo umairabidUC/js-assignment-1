@@ -191,7 +191,7 @@
                 </div>
                 <div class="modal-body" id="edit-form-body">
                     <label>Topic Name: </label>
-                    <input type="text" id="editTopic" name="topic" minlength="5" class="form-control" required
+                    <input type="text" id="editTopic" name="topic" onkeypress="trimStr()" minlength="5" class="form-control" required
                     placeholder="" />
                     <label>Duration: </label>
                     <input type="number" id="editDuration" min="0" name="duration" class="form-control" required />
