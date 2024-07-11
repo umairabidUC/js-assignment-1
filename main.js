@@ -21,6 +21,8 @@ let addTopicModal = new bootstrap.Modal(document.getElementById("staticBackdrop"
 //New Topic Form Data Handling Logic
 let tooltipflag = false;
 let form = document.querySelector("#form");
+const toastLiveExample = document.getElementById('liveToast')
+const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
 function handleForm(event) {
     event.preventDefault();
     let fd = new FormData(form)
@@ -49,6 +51,7 @@ function handleForm(event) {
     editAll();
     checkBoxChecking();
     addTopicModal.hide();
+    toastBootstrap.show()
     
     console.log(document.getElementById("addTopic").textContent)
     document.getElementById("addTopic").value = ""
@@ -60,15 +63,12 @@ form.addEventListener('submit', handleForm);
 
 
 
-const toastLiveExample = document.getElementById('liveToast')
-const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
-let toastTrigger = document.getElementById("btn-add-topic")
-toastTrigger.addEventListener('click', () => {
-    if (tooltipflag) {
-        toastBootstrap.show()
-    }
-    tooltipflag = false;
-})
+// toastTrigger.addEventListener('click', () => {
+//     if (tooltipflag) {
+//         toastBootstrap.show()
+//     }
+//     tooltipflag = false;
+// })
 let view = document.getElementById("view")
 
 
