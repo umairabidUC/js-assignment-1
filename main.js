@@ -17,8 +17,18 @@ function minsToHours(min) {
 }
 
 //New Topic Form Data Handling Logic
-let tooltipflag = false;
+let tooltipflag = true;
 let form = document.querySelector("#form");
+const toastLiveExample = document.getElementById('liveToast')
+const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+let toastTrigger = document.getElementById("btn-add-topic")
+toastTrigger.addEventListener('click', () => {
+    debugger;
+    if (tooltipflag) {
+        toastBootstrap.show()
+    }
+    tooltipflag = false;
+})
 function handleForm(event) {
     event.preventDefault();
     let fd = new FormData(form)
@@ -40,28 +50,19 @@ function handleForm(event) {
                                 data-bs-target="#confirmDeletion" onClick="delRow(event)">Delete</button><button type="button"
                                 class="btn btn-outline-warning edit" data-bs-toggle="modal"
                                 data-bs-target="#editForm" onclick="editRow(event)">Edit</button>
-                            </div>
-                            </td>
-            </tr>`;
-    tooltipflag = true;
+                                </div>
+                                </td>
+                                </tr>`;
+                                tooltipflag = true;
     editAll();
     checkBoxChecking();
 
 }
 form.addEventListener('submit', handleForm);
 
-
-
-const toastLiveExample = document.getElementById('liveToast')
-const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
-let toastTrigger = document.getElementById("btn-add-topic")
-toastTrigger.addEventListener('click', () => {
-    if (tooltipflag) {
-        toastBootstrap.show()
-    }
-    tooltipflag = false;
-})
 let view = document.getElementById("view")
+
+
 
 
 //A utility function for changing the view and updating the UI to show proper data.
