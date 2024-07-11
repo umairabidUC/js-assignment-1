@@ -49,6 +49,12 @@ function handleForm(event) {
     editAll();
     checkBoxChecking();
     addTopicModal.hide();
+    
+    console.log(document.getElementById("addTopic").textContent)
+    document.getElementById("addTopic").value = ""
+    document.getElementById("addHours").value = ""
+    document.getElementById("addMins").value = ""
+    document.getElementById("addLink").value = ""
 }
 form.addEventListener('submit', handleForm);
 
